@@ -49,13 +49,11 @@ class SongBox extends React.Component {
       if(Array.isArray(songList)){
         let key = 0;
         songList.forEach((song) => {
-          song.id = key;
-          key++;
+          song.id = key++;
         })
       }
 
       this.setState({songList: songList});
-
     })
     request.send();
   }
