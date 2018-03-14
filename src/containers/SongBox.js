@@ -1,5 +1,5 @@
 import React from 'react'
-//import SongList from '../components/SongList.js'
+import SongList from '../components/SongList.js'
 
 class SongBox extends React.Component {
 
@@ -21,9 +21,14 @@ class SongBox extends React.Component {
 
 
   render(){
-    return (<div className="flex-box-row">
-              <input type="number" id="song-count-limit" value={this.state.limit} onChange={this.handleLimitChange} placeholder="Set the limit of songs"/>
-              <button onClick={this.handleRequestGetSongList}>GET SONGS</button>
+    return (<div className="flex-box-column">
+              <div className="flex-box-row">
+                <input type="number" id="song-count-limit" value={this.state.limit} onChange={this.handleLimitChange} placeholder="Set the limit of songs"/>
+                <button onClick={this.handleRequestGetSongList}>GET SONGS</button>
+              </div>
+              <div>
+                <SongList songList={this.state.songList}/>
+              </div>
             </div>
           );
 
@@ -38,9 +43,19 @@ class SongBox extends React.Component {
     const request = new XMLHttpRequest();
     request.open("GET", this.state.url);
     request.addEventListener("load", () => {
-      let jsonSongList = JSON.parse(request.responseText);
-      this.setState({songList: jsonSongList.feed.entry});
-      console.log(this.state.url);
+
+      let songList = JSON.parse(request.responseText).feed.entry;
+
+      if(Array.isArray(songList)){
+        let key = 0;
+        songList.forEach((song) => {
+          song.id = key;
+          key++;
+        })
+      }
+
+      this.setState({songList: songList});
+
     })
     request.send();
   }
