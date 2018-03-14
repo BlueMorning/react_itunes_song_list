@@ -17,11 +17,11 @@ class SongBox extends React.Component {
 
 
   render(){
-    return (<div>
-            <label htmlFor="song-count-limit">Limit of songs </label>
-            <input type="number" id="song-count-limit"/>
-            <button onClick="handleRequestGetSongList">GET SONGS</button>
-          </div>);
+    return (<div className="flex-box-row">
+              <input type="number" id="song-count-limit" placeholder="Set the limit of songs"/>
+              <button onClick="handleRequestGetSongList">GET SONGS</button>
+            </div>
+          );
 
   }
 

@@ -12,3 +12,14 @@ input[type=number]{
   text-align: right;
   padding: 3px 10px;
 }
+
+button {
+  height: 50px;
+}
+
+.flex-box-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
